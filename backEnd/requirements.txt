@@ -1,0 +1,5 @@
+Flask
+Flask-CORS
+pandas
+mysql-connector-python
+prophet

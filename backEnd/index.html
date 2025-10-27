@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BusBooking - Modern Bus Reservation System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      .trip-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+      .auth-container {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-gray-50">
+    <!-- App Container (simulating React) -->
+    <div id="app">
+      <!-- Header Component -->
+      <header class="bg-white shadow-sm">
+        <div
+          class="container mx-auto px-4 py-3 flex justify-between items-center"
+        >
+          <div class="flex items-center">
+            <i class="fas fa-bus text-blue-600 text-2xl mr-2"></i>
+            <span class="text-xl font-bold text-blue-600">BusBooking</span>
+          </div>
+          <nav class="hidden md:flex space-x-8">
+            <a
+              href="#"
+              class="text-gray-700 hover:text-blue-600 font-medium"
+              onclick="showPage('home')"
+              >Home</a
+            >
+            <a
+              href="#"
+              class="text-gray-700 hover:text-blue-600 font-medium"
+              onclick="showPage('login')"
+              >Login</a
+            >
+            <a href="#" class="text-gray-700 hover:text-blue-600 font-medium"
+              >Contact</a
+            >
+          </nav>
+          <button class="md:hidden text-gray-700">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Content Area -->
+      <main>
+        <!-- Home Page -->
+        <div id="home-page" class="page">
+          <section class="relative h-96 bg-blue-900 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+              <img
+                src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                alt="Bus traveling"
+                class="w-full h-full object-cover opacity-30"
+              />
+            </div>
+            <div
+              class="relative z-10 h-full flex flex-col justify-center items-center text-center px-4"
+            >
+              <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                Book Your Next Journey
+              </h1>
+              <p class="text-xl text-blue-100 mb-8 max-w-2xl">
+                Find and book bus tickets across the country with our
+                easy-to-use platform
+              </p>
+
+              <!-- Search Form -->
+              <div class="w-full max-w-4xl bg-white rounded-lg shadow-xl p-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label class="block text-gray-700 text-sm font-medium mb-1"
+                      >From</label
+                    >
+                    <div class="relative">
+                      <i
+                        class="fas fa-map-marker-alt absolute left-3 top-3 text-gray-400"
+                      ></i>
+                      <input
+                        type="text"
+                        placeholder="Departure city"
+                        class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-gray-700 text-sm font-medium mb-1"
+                      >To</label
+                    >
+                    <div class="relative">
+                      <i
+                        class="fas fa-map-marker-alt absolute left-3 top-3 text-gray-400"
+                      ></i>
+                      <input
+                        type="text"
+                        placeholder="Arrival city"
+                        class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-gray-700 text-sm font-medium mb-1"
+                      >Date</label
+                    >
+                    <div class="relative">
+                      <i
+                        class="fas fa-calendar-day absolute left-3 top-3 text-gray-400"
+                      ></i>
+                      <input
+                        type="date"
+                        class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button
+                  class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300"
+                  onclick="showPage('trips')"
+                >
+                  Search Buses
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+              <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">
+                Why Choose Us?
+              </h2>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div
+                  class="text-center p-6 rounded-lg hover:bg-gray-50 transition duration-300"
+                >
+                  <div class="w-16 h-16 mx-auto mb-4">
+                    <img
+                      src="../src/Image/Quick Booking.png"
+                      alt="Quick Booking"
+                      class="w-full h-full object-contain"
+                    />
+                  </div>
+                  <h3 class="text-xl font-semibold mb-2">Quick Booking</h3>
+                  <p class="text-gray-600">
+                    Book your bus tickets in just a few clicks with our
+                    streamlined process.
+                  </p>
+                </div>
+
+               
+                <div
+                  class="text-center p-6 rounded-lg hover:bg-gray-50 transition duration-300"
+                >
+                  <div class="w-16 h-16 mx-auto mb-4">
+                    <img
+                      src="../src/Image/Safe Travel.png"
+                      alt="Safe Travel"
+                      class="w-full h-full object-contain"
+                    />
+                  </div>
+                  <h3 class="text-xl font-semibold mb-2">Safe Travel</h3>
+                  <p class="text-gray-600">
+                    We partner with trusted operators who prioritize your safety
+                    and comfort.
+                  </p>
+                </div>
+
+                
+                <div
+                  class="text-center p-6 rounded-lg hover:bg-gray-50 transition duration-300"
+                >
+                  <div class="w-16 h-16 mx-auto mb-4">
+                    <img
+                      src="../src/Image/Support.png"
+                      alt="24/7 Support"
+                      class="w-full h-full object-contain"
+                    />
+                  </div>
+                  <h3 class="text-xl font-semibold mb-2">24/7 Support</h3>
+                  <p class="text-gray-600">
+                    Our customer service team is always ready to assist you with
+                    any queries.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Login Page -->
+        <div id="login-page" class="page hidden">
+          <section
+            class="min-h-screen gradient-bg flex items-center justify-center p-4"
+          >
+            <div
+              class="auth-container rounded-xl shadow-2xl overflow-hidden w-full max-w-md"
+            >
+              <div class="p-8 bg-white">
+                <div class="text-center mb-8">
+                  <h2 class="text-3xl font-bold text-gray-800">Welcome Back</h2>
+                  <p class="text-gray-600 mt-2">Login to your account</p>
+                </div>
+                <form>
+                  <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-medium mb-2"
+                      >Email Address</label
+                    >
+                    <div class="relative">
+                      <i
+                        class="fas fa-envelope absolute left-3 top-3 text-gray-400"
+                      ></i>
+                      <input
+                        type="email"
+                        placeholder="your@email.com"
+                        class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-medium mb-2"
+                      >Password</label
+                    >
+                    <div class="relative">
+                      <i
+                        class="fas fa-lock absolute left-3 top-3 text-gray-400"
+                      ></i>
+                      <input
+                        type="password"
+                        placeholder="••••••••"
+                        class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                      <input
+                        type="checkbox"
+                        id="remember"
+                        class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      />
+                      <label
+                        for="remember"
+                        class="ml-2 block text-sm text-gray-700"
+                        >Remember me</label
+                      >
+                    </div>
+                    <a href="#" class="text-sm text-blue-600 hover:underline"
+                      >Forgot password?</a
+                    >
+                  </div>
+                  <button
+                    type="button"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300"
+                  >
+                    Login
+                  </button>
+                </form>
+                <div class="mt-6 text-center">
+                  <p class="text-gray-600">
+                    Don't have an account?
+                    <a
+                      href="#"
+                      class="text-blue-600 hover:underline font-medium"
+                      onclick="showPage('signup')"
+                      >Sign up</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Signup Page -->
+        <div id="signup-page" class="page hidden">
+          <section
+            class="min-h-screen gradient-bg flex items-center justify-center p-4"
+          >
+            <div
+              class="auth-container rounded-xl shadow-2xl overflow-hidden w-full max-w-md"
+            >
+              <div class="p-8 bg-white">
+                <div class="text-center mb-8">
+                  <h2 class="text-3xl font-bold text-gray-800">
+                    Create Account
+                  </h2>
+                  <p class="text-gray-600 mt-2">
+                    Join thousands of happy travelers
+                  </p>
+                </div>
+                <form>
+                  <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-medium mb-2"
+                      >Full Name</label
+                    >
+                    <div class="relative">
+                      <i
+                        class="fas fa-user absolute left-3 top-3 text-gray-400"
+                      ></i>
+                      <input
+                        type="text"
+                        placeholder="John Doe"
+                        class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-medium mb-2"
+                      >Email Address</label
+                    >
+                    <div class="relative">
+                      <i
+                        class="fas fa-envelope absolute left-3 top-3 text-gray-400"
+                      ></i>
+                      <input
+                        type="email"
+                        placeholder="your@email.com"
+                        class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-medium mb-2"
+                      >Phone Number</label
+                    >
+                    <div class="relative">
+                      <i
+                        class="fas fa-phone absolute left-3 top-3 text-gray-400"
+                      ></i>
+                      <input
+                        type="tel"
+                        placeholder="+1 234 567 890"
+                        class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-medium mb-2"
+                      >Password</label
+                    >
+                    <div class="relative">
+                      <i
+                        class="fas fa-lock absolute left-3 top-3 text-gray-400"
+                      ></i>
+                      <input
+                        type="password"
+                        placeholder="••••••••"
+                        class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-medium mb-2"
+                      >Confirm Password</label
+                    >
+                    <div class="relative">
+                      <i
+                        class="fas fa-lock absolute left-3 top-3 text-gray-400"
+                      ></i>
+                      <input
+                        type="password"
+                        placeholder="••••••••"
+                        class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-300"
+                  >
+                    Create Account
+                  </button>
+                </form>
+                <div class="mt-6 text-center">
+                  <p class="text-gray-600">
+                    Already have an account?
+                    <a
+                      href="#"
+                      class="text-blue-600 hover:underline font-medium"
+                      onclick="showPage('login')"
+                      >Login</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Trips List Page -->
+        <div id="trips-page" class="page hidden">
+          <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4">
+              <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                  Available Trips
+                </h1>
+                <p class="text-gray-600">
+                  Showing results for:
+                  <span class="font-medium">New York to Boston</span> on
+                  <span class="font-medium">June 15, 2023</span>
+                </p>
+              </div>
+
+              <!-- Filters -->
+              <div class="bg-white rounded-lg shadow-sm p-4 mb-8">
+                <div class="flex flex-wrap items-center justify-between">
+                  <div class="mb-4 md:mb-0">
+                    <label class="block text-gray-700 text-sm font-medium mb-1"
+                      >Sort by:</label
+                    >
+                    <select
+                      class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option>Price (Low to High)</option>
+                      <option>Price (High to Low)</option>
+                      <option>Departure Time (Earliest)</option>
+                      <option>Departure Time (Latest)</option>
+                    </select>
+                  </div>
+                  <div class="flex space-x-4">
+                    <div class="flex items-center">
+                      <input
+                        type="checkbox"
+                        id="ac"
+                        class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      />
+                      <label for="ac" class="ml-2 block text-sm text-gray-700"
+                        >AC Buses</label
+                      >
+                    </div>
+                    <div class="flex items-center">
+                      <input
+                        type="checkbox"
+                        id="sleeper"
+                        class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      />
+                      <label
+                        for="sleeper"
+                        class="ml-2 block text-sm text-gray-700"
+                        >Sleeper</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Trip Cards -->
+              <div class="grid grid-cols-1 gap-6">
+                <!-- Trip 1 -->
+                <div
+                  class="trip-card bg-white rounded-xl shadow-sm overflow-hidden transition duration-300"
+                >
+                  <div class="p-6">
+                    <div
+                      class="flex flex-col md:flex-row md:items-center md:justify-between"
+                    >
+                      <div class="mb-4 md:mb-0">
+                        <div class="flex items-center mb-2">
+                          <img
+                            src="../src/Image/background.jpg"
+                            alt="Bus Operator"
+                            class="w-10 h-10 rounded-full mr-3"
+                          />
+                          <div>
+                            <h3 class="font-bold text-lg">Greyhound Express</h3>
+                            <p class="text-gray-600 text-sm">Standard AC Bus</p>
+                          </div>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                          <i class="fas fa-star text-yellow-400 mr-1"></i>
+                          <span>4.5 (128 reviews)</span>
+                        </div>
+                      </div>
+                      <div
+                        class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-8"
+                      >
+                        <div class="text-center">
+                          <p class="text-gray-700 font-medium">07:30 AM</p>
+                          <p class="text-gray-500 text-sm">New York</p>
+                        </div>
+                        <div class="text-center">
+                          <p class="text-gray-500 text-sm">4h 30m</p>
+                          <div class="relative">
+                            <div
+                              class="h-px bg-gray-300 w-16 md:w-24 mt-3"
+                            ></div>
+                            <i
+                              class="fas fa-bus absolute -top-2 left-1/2 transform -translate-x-1/2 text-blue-500"
+                            ></i>
+                          </div>
+                        </div>
+                        <div class="text-center">
+                          <p class="text-gray-700 font-medium">12:00 PM</p>
+                          <p class="text-gray-500 text-sm">Boston</p>
+                        </div>
+                        <div class="text-center md:text-right">
+                          <p class="text-2xl font-bold text-blue-600">$29.99</p>
+                          <p class="text-gray-500 text-sm">per seat</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="bg-gray-50 px-6 py-4 flex justify-between items-center"
+                  >
+                    <div class="flex space-x-4 text-sm">
+                      <span class="flex items-center text-gray-600">
+                        <i class="fas fa-wifi text-blue-500 mr-2"></i> WiFi
+                      </span>
+                      <span class="flex items-center text-gray-600">
+                        <i class="fas fa-plug text-blue-500 mr-2"></i> Charger
+                      </span>
+                      <span class="flex items-center text-gray-600">
+                        <i class="fas fa-snowflake text-blue-500 mr-2"></i> AC
+                      </span>
+                    </div>
+                    <button
+                      class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Trip 2 -->
+                <div
+                  class="trip-card bg-white rounded-xl shadow-sm overflow-hidden transition duration-300"
+                >
+                  <div class="p-6">
+                    <div
+                      class="flex flex-col md:flex-row md:items-center md:justify-between"
+                    >
+                      <div class="mb-4 md:mb-0">
+                        <div class="flex items-center mb-2">
+                          <img
+                            src="../src/Image/background.jpg"
+                            alt="Bus Operator"
+                            class="w-10 h-10 rounded-full mr-3"
+                          />
+                          <div>
+                            <h3 class="font-bold text-lg">Megabus</h3>
+                            <p class="text-gray-600 text-sm">Double Decker</p>
+                          </div>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                          <i class="fas fa-star text-yellow-400 mr-1"></i>
+                          <span>4.2 (95 reviews)</span>
+                        </div>
+                      </div>
+                      <div
+                        class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-8"
+                      >
+                        <div class="text-center">
+                          <p class="text-gray-700 font-medium">09:15 AM</p>
+                          <p class="text-gray-500 text-sm">New York</p>
+                        </div>
+                        <div class="text-center">
+                          <p class="text-gray-500 text-sm">5h 15m</p>
+                          <div class="relative">
+                            <div
+                              class="h-px bg-gray-300 w-16 md:w-24 mt-3"
+                            ></div>
+                            <i
+                              class="fas fa-bus absolute -top-2 left-1/2 transform -translate-x-1/2 text-blue-500"
+                            ></i>
+                          </div>
+                        </div>
+                        <div class="text-center">
+                          <p class="text-gray-700 font-medium">02:30 PM</p>
+                          <p class="text-gray-500 text-sm">Boston</p>
+                        </div>
+                        <div class="text-center md:text-right">
+                          <p class="text-2xl font-bold text-blue-600">$24.99</p>
+                          <p class="text-gray-500 text-sm">per seat</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="bg-gray-50 px-6 py-4 flex justify-between items-center"
+                  >
+                    <div class="flex space-x-4 text-sm">
+                      <span class="flex items-center text-gray-600">
+                        <i class="fas fa-wifi text-blue-500 mr-2"></i> WiFi
+                      </span>
+                      <span class="flex items-center text-gray-600">
+                        <i class="fas fa-utensils text-blue-500 mr-2"></i>
+                        Snacks
+                      </span>
+                    </div>
+                    <button
+                      class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Trip 3 -->
+                <div
+                  class="trip-card bg-white rounded-xl shadow-sm overflow-hidden transition duration-300"
+                >
+                  <div class="p-6">
+                    <div
+                      class="flex flex-col md:flex-row md:items-center md:justify-between"
+                    >
+                      <div class="mb-4 md:mb-0">
+                        <div class="flex items-center mb-2">
+                          <img
+                            src="../src/Image/background.jpg"
+                            alt="Bus Operator"
+                            class="w-10 h-10 rounded-full mr-3"
+                          />
+                          <div>
+                            <h3 class="font-bold text-lg">BoltBus</h3>
+                            <p class="text-gray-600 text-sm">Premium Coach</p>
+                          </div>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                          <i class="fas fa-star text-yellow-400 mr-1"></i>
+                          <span>4.7 (156 reviews)</span>
+                        </div>
+                      </div>
+                      <div
+                        class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-8"
+                      >
+                        <div class="text-center">
+                          <p class="text-gray-700 font-medium">11:00 AM</p>
+                          <p class="text-gray-500 text-sm">New York</p>
+                        </div>
+                        <div class="text-center">
+                          <p class="text-gray-500 text-sm">4h 45m</p>
+                          <div class="relative">
+                            <div
+                              class="h-px bg-gray-300 w-16 md:w-24 mt-3"
+                            ></div>
+                            <i
+                              class="fas fa-bus absolute -top-2 left-1/2 transform -translate-x-1/2 text-blue-500"
+                            ></i>
+                          </div>
+                        </div>
+                        <div class="text-center">
+                          <p class="text-gray-700 font-medium">03:45 PM</p>
+                          <p class="text-gray-500 text-sm">Boston</p>
+                        </div>
+                        <div class="text-center md:text-right">
+                          <p class="text-2xl font-bold text-blue-600">$34.99</p>
+                          <p class="text-gray-500 text-sm">per seat</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="bg-gray-50 px-6 py-4 flex justify-between items-center"
+                  >
+                    <div class="flex space-x-4 text-sm">
+                      <span class="flex items-center text-gray-600">
+                        <i class="fas fa-wifi text-blue-500 mr-2"></i> WiFi
+                      </span>
+                      <span class="flex items-center text-gray-600">
+                        <i class="fas fa-plug text-blue-500 mr-2"></i> Charger
+                      </span>
+                      <span class="flex items-center text-gray-600">
+                        <i class="fas fa-snowflake text-blue-500 mr-2"></i> AC
+                      </span>
+                      <span class="flex items-center text-gray-600">
+                        <i class="fas fa-tv text-blue-500 mr-2"></i>
+                        Entertainment
+                      </span>
+                    </div>
+                    <button
+                      class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300"
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- Footer Component -->
+      <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <div class="flex items-center mb-4">
+                <i class="fas fa-bus text-blue-400 text-2xl mr-2"></i>
+                <span class="text-xl font-bold">BusBooking</span>
+              </div>
+              <p class="text-gray-400">
+                Making bus travel simple, convenient and affordable for
+                everyone.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+              <ul class="space-y-2">
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-white transition duration-300"
+                    >Home</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-white transition duration-300"
+                    >Search Buses</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-white transition duration-300"
+                    >My Bookings</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-white transition duration-300"
+                    >Offers</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold mb-4">Support</h3>
+              <ul class="space-y-2">
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-white transition duration-300"
+                    >Contact Us</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-white transition duration-300"
+                    >FAQs</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-white transition duration-300"
+                    >Privacy Policy</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-gray-400 hover:text-white transition duration-300"
+                    >Terms & Conditions</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+              <ul class="space-y-2">
+                <li class="flex items-center text-gray-400">
+                  <i class="fas fa-map-marker-alt mr-3"></i> 123 Bus St, New
+                  York, NY
+                </li>
+                <li class="flex items-center text-gray-400">
+                  <i class="fas fa-phone mr-3"></i> +1 (234) 567-8900
+                </li>
+                <li class="flex items-center text-gray-400">
+                  <i class="fas fa-envelope mr-3"></i> support@busbooking.com
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400"
+          >
+            <p>&copy; 2023 BusBooking. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // Simple page routing simulation
+      function showPage(pageId) {
+        // Hide all pages
+        document.querySelectorAll(".page").forEach((page) => {
+          page.classList.add("hidden");
+        });
+
+        // Show the requested page
+        document.getElementById(`${pageId}-page`).classList.remove("hidden");
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+      }
+
+      // Initialize with home page
+      document.addEventListener("DOMContentLoaded", () => {
+        showPage("home");
+      });
+    </script>
+  </body>
+</html>
